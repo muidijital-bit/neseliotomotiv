@@ -2,7 +2,8 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
     <title>Neşeli - Dijital Strateji Raporu</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,11 +13,14 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: 'Open Sans', sans-serif;
             background-color: #f8fafc;
             background-image: radial-gradient(at 100% 0%, hsla(28,100%,74%,0.08) 0px, transparent 50%),
                               radial-gradient(at 0% 100%, hsla(210,100%,85%,0.15) 0px, transparent 50%);
             background-attachment: fixed;
+            -webkit-tap-highlight-color: transparent;
         }
         h1, h2, h3, h4, .title-font {
             font-family: 'Montserrat', sans-serif;
@@ -64,8 +68,14 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
         }
         .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 4px;
+            height: 4px;
+        }
+        @media (min-width: 768px) {
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: transparent;
@@ -77,14 +87,19 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+        
+        /* Çentikli telefonlar (iOS) için ekstra koruma */
+        .safe-top-padding {
+            padding-top: max(1rem, env(safe-area-inset-top));
+        }
     </style>
 </head>
-<body class="text-slate-800 antialiased selection:bg-orange-500 selection:text-white">
+<body class="text-slate-800 antialiased selection:bg-orange-500 selection:text-white m-0 p-0 w-full overflow-x-hidden">
 
-<div class="min-h-screen flex flex-col md:flex-row">
+<div class="min-h-screen w-full flex flex-col md:flex-row">
     <!-- Mobil Header -->
-    <div class="md:hidden bg-[#0f172a] text-white p-4 px-5 flex justify-between items-center sticky top-0 z-40 shadow-lg border-b border-slate-800">
-        <h1 class="text-3xl tracking-wider logo-font drop-shadow-sm">
+    <div class="md:hidden bg-[#0f172a] text-white p-4 px-5 flex justify-between items-center sticky top-0 w-full z-50 shadow-lg border-b border-slate-800 safe-top-padding">
+        <h1 class="text-3xl tracking-wider logo-font drop-shadow-sm leading-none flex items-center">
             NEŞELİ<span class="text-orange-500">.</span>
         </h1>
         <button onclick="toggleSidebar()" class="p-2 focus:outline-none bg-slate-800/80 rounded-xl hover:bg-slate-700 transition-colors backdrop-blur-sm">
@@ -96,24 +111,24 @@
     <div id="sidebar-backdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/70 z-40 hidden md:hidden backdrop-blur-sm transition-opacity opacity-0"></div>
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-50 w-[280px] md:w-[280px] bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white flex flex-col shadow-2xl h-full md:h-screen sticky top-0 border-r border-slate-800/50">
-        <div class="p-8 border-b border-slate-800/60 flex justify-between items-start">
+    <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-50 w-[260px] sm:w-[280px] bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white flex flex-col shadow-2xl h-full md:h-screen sticky top-0 border-r border-slate-800/50">
+        <div class="p-6 md:p-8 border-b border-slate-800/60 flex justify-between items-start">
             <div>
-                <h1 class="text-5xl tracking-wider logo-font drop-shadow-md">
+                <h1 class="text-4xl md:text-5xl tracking-wider logo-font drop-shadow-md">
                     NEŞELİ<span class="text-orange-500">.</span>
                 </h1>
                 <div class="mt-2 inline-flex items-center space-x-2 bg-slate-800/50 rounded-full px-3 py-1 border border-slate-700/50">
-                    <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
-                    <p class="text-[10px] text-slate-300 uppercase tracking-widest font-semibold">Dijital Strateji</p>
+                    <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse flex-shrink-0"></div>
+                    <p class="text-[9px] md:text-[10px] text-slate-300 uppercase tracking-widest font-semibold truncate">Dijital Strateji</p>
                 </div>
             </div>
             <!-- Mobilde yan menüyü kapatma butonu -->
-            <button onclick="toggleSidebar()" class="md:hidden p-1.5 -mr-3 -mt-2 text-slate-400 hover:text-white bg-slate-800/50 rounded-lg">
+            <button onclick="toggleSidebar()" class="md:hidden p-1.5 -mr-2 text-slate-400 hover:text-white bg-slate-800/50 rounded-lg">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
         
-        <nav class="flex-1 px-4 py-8 space-y-2.5 overflow-y-auto custom-scrollbar">
+        <nav class="flex-1 px-3 md:px-4 py-6 md:py-8 space-y-2.5 overflow-y-auto custom-scrollbar pb-20 md:pb-8">
             <button onclick="showTab('ozet', this)" class="sidebar-item active w-full flex items-center space-x-3.5 px-4 py-3.5 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white group">
                 <i data-lucide="target" class="w-5 h-5 flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity"></i>
                 <span class="font-semibold text-sm text-left tracking-wide">Marka Özeti</span>
@@ -145,14 +160,14 @@
         </nav>
         
         <!-- Corporate Footer -->
-        <div class="p-6 mt-auto border-t border-slate-800/60 bg-slate-900/40 relative overflow-hidden">
+        <div class="p-5 md:p-6 mt-auto border-t border-slate-800/60 bg-slate-900/40 relative overflow-hidden">
             <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl"></div>
             <div class="relative z-10 text-center">
                 <div class="mb-2">
-                    <span class="text-[9px] text-slate-500 uppercase tracking-[0.25em] block mb-1">Stratejik Partner</span>
-                    <span class="text-sm text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-400 font-bold tracking-widest title-font">MUIMEDYA</span>
+                    <span class="text-[8px] md:text-[9px] text-slate-500 uppercase tracking-[0.25em] block mb-1">Stratejik Partner</span>
+                    <span class="text-xs md:text-sm text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-400 font-bold tracking-widest title-font">MUIMEDYA</span>
                 </div>
-                <p class="text-[10px] text-slate-500/80 leading-relaxed font-medium mt-3 border-t border-slate-800 pt-3">
+                <p class="text-[9px] md:text-[10px] text-slate-500/80 leading-relaxed font-medium mt-2 md:mt-3 border-t border-slate-800 pt-2 md:pt-3">
                     Bu rapor Neşeli için özel olarak hazırlanmıştır.<br/>
                     © 2026 Dijital Performans Ajansı.
                 </p>
@@ -161,59 +176,59 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-4 md:p-8 lg:p-10 overflow-y-auto w-full">
-        <header class="mb-10 border-b border-slate-200/80 pb-6 flex flex-col md:flex-row md:items-end justify-between">
+    <main class="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 overflow-x-hidden overflow-y-auto w-full max-w-full pb-24 md:pb-10">
+        <header class="mb-8 md:mb-10 border-b border-slate-200/80 pb-5 md:pb-6 flex flex-col lg:flex-row lg:items-end justify-between">
             <div>
-                <h2 id="page-title" class="text-3xl md:text-4xl lg:text-[40px] font-extrabold text-slate-800 title-font tracking-tight capitalize drop-shadow-sm">Marka Özeti ve Hedefler</h2>
-                <p class="text-slate-500 mt-3 text-base md:text-lg font-medium">Sektörde güvenin, dijitalde otoritenin yeni yüzü.</p>
+                <h2 id="page-title" class="text-2xl sm:text-3xl md:text-4xl lg:text-[40px] font-extrabold text-slate-800 title-font tracking-tight capitalize drop-shadow-sm leading-tight">Marka Özeti ve Hedefler</h2>
+                <p class="text-slate-500 mt-2 md:mt-3 text-sm sm:text-base md:text-lg font-medium">Sektörde güvenin, dijitalde otoritenin yeni yüzü.</p>
             </div>
-            <div class="hidden md:flex items-center space-x-2 text-slate-400 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100 text-sm font-medium mt-4 md:mt-0">
+            <div class="hidden lg:flex items-center space-x-2 text-slate-400 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100 text-sm font-medium mt-4 lg:mt-0">
                 <i data-lucide="clock" class="w-4 h-4"></i>
                 <span>Tahmini Okuma: 4 dk</span>
             </div>
         </header>
 
         <!-- --- TAB: ÖZET --- -->
-        <div id="ozet" class="tab-content active space-y-8">
-            <div class="glass-card p-6 md:p-10 rounded-3xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl -z-10 opacity-60 translate-x-1/2 -translate-y-1/2"></div>
+        <div id="ozet" class="tab-content active space-y-6 md:space-y-8">
+            <div class="glass-card p-5 sm:p-6 md:p-10 rounded-2xl md:rounded-3xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-48 h-48 md:w-64 md:h-64 bg-orange-50 rounded-full blur-3xl -z-10 opacity-60 translate-x-1/3 -translate-y-1/3"></div>
                 
-                <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-5 flex items-center title-font">
-                    <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mr-4 shadow-sm border border-orange-200/50">
-                        <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-4 md:mb-5 flex items-center title-font">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mr-3 md:mr-4 shadow-sm border border-orange-200/50 flex-shrink-0">
+                        <i data-lucide="alert-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
                     </div>
                     Mevcut Durum & Odak
                 </h3>
-                <p class="text-slate-600 leading-relaxed md:text-lg mb-8 font-medium">
-                    Neşeli Kamyon Tır Pazarı (Tuzla & Ankara) fiziki olarak çok güçlü bir altyapıya sahip olmasına rağmen, dijital varlığı daha çok statik ilanlara dayanmaktadır. Yeni stratejinin temel amacı: <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded-md font-bold">Statik ilan panosundan, dinamik, video odaklı ve güven veren bir medya organına dönüşmektir.</span>
+                <p class="text-slate-600 leading-relaxed text-sm sm:text-base md:text-lg mb-6 md:mb-8 font-medium">
+                    Neşeli Kamyon Tır Pazarı (Tuzla & Ankara) fiziki olarak çok güçlü bir altyapıya sahip olmasına rağmen, dijital varlığı daha çok statik ilanlara dayanmaktadır. Yeni stratejinin temel amacı: <span class="bg-orange-100 text-orange-800 px-2 py-0.5 rounded-md font-bold inline-block mt-1">Statik ilan panosundan, dinamik, video odaklı ve güven veren bir medya organına dönüşmektir.</span>
                 </p>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-8">
+                    <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-orange-600"></div>
-                        <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center mb-4 text-orange-600 group-hover:scale-110 transition-transform">
-                            <i data-lucide="target" class="w-5 h-5"></i>
+                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-orange-50 flex items-center justify-center mb-3 md:mb-4 text-orange-600 group-hover:scale-110 transition-transform">
+                            <i data-lucide="target" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </div>
-                        <div class="font-bold text-slate-800 text-lg mb-2 title-font">Ana Hedef</div>
-                        <div class="text-slate-600 text-sm md:text-base leading-relaxed">Kiralama taleplerini filtreleyerek, <strong class="text-slate-800">sadece araç satışına</strong> odaklı ve satın alma niyeti yüksek <strong class="text-slate-800">Lead</strong> toplamak.</div>
+                        <div class="font-bold text-slate-800 text-base md:text-lg mb-1 md:mb-2 title-font">Ana Hedef</div>
+                        <div class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">Kiralama taleplerini filtreleyerek, <strong class="text-slate-800">sadece araç satışına</strong> odaklı ve satın alma niyeti yüksek <strong class="text-slate-800">Lead</strong> toplamak.</div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
-                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mb-4 text-blue-600 group-hover:scale-110 transition-transform">
-                            <i data-lucide="smartphone" class="w-5 h-5"></i>
+                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-50 flex items-center justify-center mb-3 md:mb-4 text-blue-600 group-hover:scale-110 transition-transform">
+                            <i data-lucide="smartphone" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </div>
-                        <div class="font-bold text-slate-800 text-lg mb-2 title-font">Öncelikli Kanallar</div>
-                        <div class="text-slate-600 text-sm md:text-base leading-relaxed">Dikey video çağının gücü: <strong class="text-slate-800">Instagram Reels</strong> ve <strong class="text-slate-800">YouTube Shorts</strong>.</div>
+                        <div class="font-bold text-slate-800 text-base md:text-lg mb-1 md:mb-2 title-font">Öncelikli Kanallar</div>
+                        <div class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">Dikey video çağının gücü: <strong class="text-slate-800">Instagram Reels</strong> ve <strong class="text-slate-800">YouTube Shorts</strong>.</div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                    <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/40 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-400 to-rose-600"></div>
-                        <div class="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center mb-4 text-rose-600 group-hover:scale-110 transition-transform">
-                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-rose-50 flex items-center justify-center mb-3 md:mb-4 text-rose-600 group-hover:scale-110 transition-transform">
+                            <i data-lucide="shield-alert" class="w-4 h-4 md:w-5 md:h-5"></i>
                         </div>
-                        <div class="font-bold text-slate-800 text-lg mb-2 title-font">En Büyük Engel</div>
-                        <div class="text-slate-600 text-sm md:text-base leading-relaxed">Sektörün en büyük yarası olan "Hasar kaydı ve fiyat belirsizliği" itirazlarını <strong class="text-slate-800">şeffaflıkla yıkmak.</strong></div>
+                        <div class="font-bold text-slate-800 text-base md:text-lg mb-1 md:mb-2 title-font">En Büyük Engel</div>
+                        <div class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">Sektörün en büyük yarası olan "Hasar kaydı ve fiyat belirsizliği" itirazlarını <strong class="text-slate-800">şeffaflıkla yıkmak.</strong></div>
                     </div>
                 </div>
             </div>
@@ -221,95 +236,95 @@
 
         <!-- --- TAB: KİTLE --- -->
         <div id="kitle" class="tab-content">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
                 <!-- Persona 1 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-orange-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
-                        <i data-lucide="user" class="w-32 h-32 text-orange-500"></i>
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-orange-500">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
+                        <i data-lucide="user" class="w-24 h-24 md:w-32 md:h-32 text-orange-500"></i>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-orange-200/50 group-hover:shadow-md transition-shadow">
-                        <i data-lucide="user" class="w-7 h-7"></i>
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-100 to-orange-50 text-orange-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-sm border border-orange-200/50 group-hover:shadow-md transition-shadow">
+                        <i data-lucide="user" class="w-6 h-6 md:w-7 md:h-7"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-5 title-font tracking-tight">Bireysel Esnaf / Şoför</h3>
-                    <div class="space-y-4 text-sm md:text-base relative z-10">
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-orange-600/80">Motivasyon</strong>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-4 md:mb-5 title-font tracking-tight">Bireysel Esnaf / Şoför</h3>
+                    <div class="space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base relative z-10">
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-orange-600/80">Motivasyon</strong>
                             <span class="text-slate-600 font-medium">Kendi çekicisini alıp patron olmak</span>
                         </div>
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-rose-600/80">İtiraz/Korku</strong>
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-rose-600/80">İtiraz/Korku</strong>
                             <span class="text-slate-600 font-medium">Kredim çıkar mı? Araç yolda bırakır mı?</span>
                         </div>
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-emerald-600/80">Tetikleyici</strong>
-                            <span class="text-slate-600 font-medium">Köklü firma güvencesi, bakımlı ve krediye uygun temiz 2. el araçlar</span>
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-emerald-600/80">Tetikleyici</strong>
+                            <span class="text-slate-600 font-medium">Köklü firma güvencesi, bakımlı temiz 2. el araçlar</span>
                         </div>
-                        <div class="pt-2 mt-4">
-                            <div class="bg-gradient-to-r from-orange-500 to-orange-600 p-4 rounded-xl text-white shadow-lg shadow-orange-500/20 transform group-hover:scale-[1.02] transition-transform">
-                                <span class="text-[10px] font-bold text-orange-200 uppercase tracking-widest block mb-1">Önerilen CTA</span>
-                                <p class="font-bold text-base">"Arkasında durduğumuz bakımlı araçlarla yola çık!"</p>
+                        <div class="pt-2 mt-3 md:mt-4">
+                            <div class="bg-gradient-to-r from-orange-500 to-orange-600 p-3 md:p-4 rounded-xl text-white shadow-lg shadow-orange-500/20 transform group-hover:scale-[1.02] transition-transform">
+                                <span class="text-[9px] md:text-[10px] font-bold text-orange-200 uppercase tracking-widest block mb-1">Önerilen CTA</span>
+                                <p class="font-bold text-sm md:text-base">"Arkasında durduğumuz araçlarla yola çık!"</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Persona 2 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-blue-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
-                        <i data-lucide="briefcase" class="w-32 h-32 text-blue-500"></i>
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-blue-500">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
+                        <i data-lucide="briefcase" class="w-24 h-24 md:w-32 md:h-32 text-blue-500"></i>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-blue-200/50 group-hover:shadow-md transition-shadow">
-                        <i data-lucide="briefcase" class="w-7 h-7"></i>
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-100 to-blue-50 text-blue-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-sm border border-blue-200/50 group-hover:shadow-md transition-shadow">
+                        <i data-lucide="briefcase" class="w-6 h-6 md:w-7 md:h-7"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-5 title-font tracking-tight">Büyüyen KOBİ</h3>
-                    <div class="space-y-4 text-sm md:text-base relative z-10">
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-blue-600/80">Motivasyon</strong>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-4 md:mb-5 title-font tracking-tight">Büyüyen KOBİ</h3>
+                    <div class="space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base relative z-10">
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-blue-600/80">Motivasyon</strong>
                             <span class="text-slate-600 font-medium">İşe yetişmek için hızlıca filo genişletmek</span>
                         </div>
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-rose-600/80">İtiraz/Korku</strong>
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-rose-600/80">İtiraz/Korku</strong>
                             <span class="text-slate-600 font-medium">Araçlar yorgun mu? Faturası tam mı?</span>
                         </div>
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-emerald-600/80">Tetikleyici</strong>
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-emerald-600/80">Tetikleyici</strong>
                             <span class="text-slate-600 font-medium">Toplu alım avantajı, kurumsal güven</span>
                         </div>
-                        <div class="pt-2 mt-4">
-                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 rounded-xl text-white shadow-lg shadow-blue-500/20 transform group-hover:scale-[1.02] transition-transform">
-                                <span class="text-[10px] font-bold text-blue-200 uppercase tracking-widest block mb-1">Önerilen CTA</span>
-                                <p class="font-bold text-base">"Filo fiyatları için danışmanımızla görüşün."</p>
+                        <div class="pt-2 mt-3 md:mt-4">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-3 md:p-4 rounded-xl text-white shadow-lg shadow-blue-500/20 transform group-hover:scale-[1.02] transition-transform">
+                                <span class="text-[9px] md:text-[10px] font-bold text-blue-200 uppercase tracking-widest block mb-1">Önerilen CTA</span>
+                                <p class="font-bold text-sm md:text-base">"Filo fiyatları için danışmanımızla görüşün."</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Persona 3 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-emerald-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
-                        <i data-lucide="hard-hat" class="w-32 h-32 text-emerald-500"></i>
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-emerald-500 md:col-span-2 lg:col-span-1">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity duration-300 pointer-events-none">
+                        <i data-lucide="hard-hat" class="w-24 h-24 md:w-32 md:h-32 text-emerald-500"></i>
                     </div>
-                    <div class="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-sm border border-emerald-200/50 group-hover:shadow-md transition-shadow">
-                        <i data-lucide="hard-hat" class="w-7 h-7"></i>
+                    <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-emerald-100 to-emerald-50 text-emerald-600 rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-6 shadow-sm border border-emerald-200/50 group-hover:shadow-md transition-shadow">
+                        <i data-lucide="hard-hat" class="w-6 h-6 md:w-7 md:h-7"></i>
                     </div>
-                    <h3 class="text-xl md:text-2xl font-bold text-slate-800 mb-5 title-font tracking-tight">Yatırımcı / Hafriyatçı</h3>
-                    <div class="space-y-4 text-sm md:text-base relative z-10">
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-emerald-600/80">Motivasyon</strong>
+                    <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-4 md:mb-5 title-font tracking-tight">Yatırımcı / Hafriyatçı</h3>
+                    <div class="space-y-3 md:space-y-4 text-xs sm:text-sm md:text-base relative z-10">
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-emerald-600/80">Motivasyon</strong>
                             <span class="text-slate-600 font-medium">Projeyi yetiştirmek için acil sağlam damper</span>
                         </div>
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-rose-600/80">İtiraz/Korku</strong>
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-rose-600/80">İtiraz/Korku</strong>
                             <span class="text-slate-600 font-medium">Tonaja dayanır mı? Şasi işlemli mi?</span>
                         </div>
-                        <div class="bg-white/60 p-3 rounded-xl border border-slate-100/50">
-                            <strong class="text-slate-800 block text-xs uppercase tracking-wider mb-1 text-emerald-600/80">Tetikleyici</strong>
+                        <div class="bg-white/60 p-2.5 md:p-3 rounded-xl border border-slate-100/50">
+                            <strong class="text-slate-800 block text-[10px] md:text-xs uppercase tracking-wider mb-0.5 md:mb-1 text-emerald-600/80">Tetikleyici</strong>
                             <span class="text-slate-600 font-medium">Ağır şartlara test edilmiş dayanıklı araçlar</span>
                         </div>
-                        <div class="pt-2 mt-4">
-                            <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 p-4 rounded-xl text-white shadow-lg shadow-emerald-500/20 transform group-hover:scale-[1.02] transition-transform">
-                                <span class="text-[10px] font-bold text-emerald-200 uppercase tracking-widest block mb-1">Önerilen CTA</span>
-                                <p class="font-bold text-base">"Ağır şarta hazır araçlar sahada bekliyor."</p>
+                        <div class="pt-2 mt-3 md:mt-4">
+                            <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 p-3 md:p-4 rounded-xl text-white shadow-lg shadow-emerald-500/20 transform group-hover:scale-[1.02] transition-transform">
+                                <span class="text-[9px] md:text-[10px] font-bold text-emerald-200 uppercase tracking-widest block mb-1">Önerilen CTA</span>
+                                <p class="font-bold text-sm md:text-base">"Ağır şarta hazır araçlar sahada bekliyor."</p>
                             </div>
                         </div>
                     </div>
@@ -318,50 +333,50 @@
         </div>
 
         <!-- --- TAB: STRATEJİ --- -->
-        <div id="strateji" class="tab-content space-y-8">
-            <div class="glass-card p-6 md:p-10 rounded-3xl">
-                <div class="max-w-3xl mb-10">
-                    <h3 class="text-2xl md:text-3xl font-bold text-slate-800 title-font mb-3">5 Temel Otorite Direği</h3>
-                    <p class="text-slate-500 text-base md:text-lg">Her bir içerik bu 5 doğrudan birine hizmet etmeli ve nedensel olarak doğrudan satışa (lead'e) bağlanmalıdır.</p>
+        <div id="strateji" class="tab-content space-y-6 md:space-y-8">
+            <div class="glass-card p-5 sm:p-6 md:p-10 rounded-2xl md:rounded-3xl">
+                <div class="max-w-3xl mb-8 md:mb-10">
+                    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 title-font mb-2 md:mb-3">5 Temel Otorite Direği</h3>
+                    <p class="text-slate-500 text-sm sm:text-base md:text-lg">Her bir içerik bu 5 doğrudan birine hizmet etmeli ve nedensel olarak doğrudan satışa (lead'e) bağlanmalıdır.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-orange-50 to-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm">
-                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div class="bg-white p-5 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-orange-50 to-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-sm">
+                            <i data-lucide="shield-check" class="w-5 h-5 md:w-6 md:h-6"></i>
                         </div>
-                        <h4 class="font-bold text-slate-800 title-font text-lg md:text-xl mb-3">Şeffaf Ekspertiz</h4>
-                        <p class="text-sm md:text-base text-slate-600 leading-relaxed">Motordaki ufak kusuru bile önceden videoda söylemek güveni artırır. Satış itirazlarını baştan kırar.</p>
+                        <h4 class="font-bold text-slate-800 title-font text-base md:text-lg lg:text-xl mb-2 md:mb-3">Şeffaf Ekspertiz</h4>
+                        <p class="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">Motordaki ufak kusuru bile önceden videoda söylemek güveni artırır. Satış itirazlarını baştan kırar.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm">
-                            <i data-lucide="bar-chart-4" class="w-6 h-6"></i>
+                    <div class="bg-white p-5 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-sm">
+                            <i data-lucide="bar-chart-4" class="w-5 h-5 md:w-6 md:h-6"></i>
                         </div>
-                        <h4 class="font-bold text-slate-800 title-font text-lg md:text-xl mb-3">Köklü Güvence & Yönlendirme</h4>
-                        <p class="text-sm md:text-base text-slate-600 leading-relaxed">Sektördeki köklü gücümüzle kredi süreçlerinde şeffaf yönlendirme yapıyor, kusursuz temizlenmiş bakımlı 2. el araçlarımızın her zaman arkasında duruyoruz.</p>
+                        <h4 class="font-bold text-slate-800 title-font text-base md:text-lg lg:text-xl mb-2 md:mb-3">Köklü Güvence & Yönlendirme</h4>
+                        <p class="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">Sektördeki köklü gücümüzle kredi süreçlerinde şeffaf yönlendirme yapıyor, bakımlı 2. el araçlarımızın arkasında duruyoruz.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm">
-                            <i data-lucide="truck" class="w-6 h-6"></i>
+                    <div class="bg-white p-5 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-sm">
+                            <i data-lucide="truck" class="w-5 h-5 md:w-6 md:h-6"></i>
                         </div>
-                        <h4 class="font-bold text-slate-800 title-font text-lg md:text-xl mb-3">Mega Stok & Tesis</h4>
-                        <p class="text-sm md:text-base text-slate-600 leading-relaxed">Etkileyici drone çekimleriyle 'merdiven altı galeri değil, dev pazar' algısı yaratır.</p>
+                        <h4 class="font-bold text-slate-800 title-font text-base md:text-lg lg:text-xl mb-2 md:mb-3">Mega Stok & Tesis</h4>
+                        <p class="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">Etkileyici drone çekimleriyle 'merdiven altı galeri değil, dev pazar' algısı yaratır.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-50 to-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-sm">
-                            <i data-lucide="users" class="w-6 h-6"></i>
+                    <div class="bg-white p-5 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-50 to-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition-transform shadow-sm">
+                            <i data-lucide="users" class="w-5 h-5 md:w-6 md:h-6"></i>
                         </div>
-                        <h4 class="font-bold text-slate-800 title-font text-lg md:text-xl mb-3">Esnaf Samimiyeti</h4>
-                        <p class="text-sm md:text-base text-slate-600 leading-relaxed">Danışmanların doğal dili markayı kurumsallıktan çıkarıp insanlaştırır, aidiyet kurar.</p>
+                        <h4 class="font-bold text-slate-800 title-font text-base md:text-lg lg:text-xl mb-2 md:mb-3">Esnaf Samimiyeti</h4>
+                        <p class="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">Danışmanların doğal dili markayı kurumsallıktan çıkarıp insanlaştırır, aidiyet kurar.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group lg:col-span-2">
-                        <div class="flex flex-col md:flex-row gap-6 items-start">
-                            <div class="w-12 h-12 flex-shrink-0 bg-gradient-to-br from-rose-50 to-rose-100 text-rose-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                                <i data-lucide="play-circle" class="w-6 h-6"></i>
+                    <div class="bg-white p-5 md:p-8 rounded-2xl shadow-lg shadow-slate-200/40 border border-slate-100/80 hover:-translate-y-1 transition-all group lg:col-span-2">
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 bg-gradient-to-br from-rose-50 to-rose-100 text-rose-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                                <i data-lucide="play-circle" class="w-5 h-5 md:w-6 h-6"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-slate-800 title-font text-lg md:text-xl mb-3">Korna Ritüeli (Sosyal Kanıt)</h4>
-                                <p class="text-sm md:text-base text-slate-600 leading-relaxed">Araç teslimatında büyük bir coşkuyla kornaya basan müşteri videoları (UGC), diğer potansiyel alıcıları doğrudan etkiler ve satın alma iştahını kabartır.</p>
+                                <h4 class="font-bold text-slate-800 title-font text-base md:text-lg lg:text-xl mb-2 md:mb-3">Korna Ritüeli (Sosyal Kanıt)</h4>
+                                <p class="text-xs sm:text-sm md:text-base text-slate-600 leading-relaxed">Araç teslimatında büyük bir coşkuyla kornaya basan müşteri videoları (UGC), diğer potansiyel alıcıları doğrudan etkiler ve satın alma iştahını kabartır.</p>
                             </div>
                         </div>
                     </div>
@@ -370,297 +385,297 @@
         </div>
 
         <!-- --- TAB: İÇERİK --- -->
-        <div id="icerik" class="tab-content space-y-8">
-            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 md:p-12 rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between relative overflow-hidden border border-slate-700/50">
-                <div class="absolute -right-20 -top-20 opacity-[0.05] mix-blend-overlay">
-                    <i data-lucide="aperture" class="w-96 h-96"></i>
+        <div id="icerik" class="tab-content space-y-6 md:space-y-8">
+            <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col lg:flex-row items-start lg:items-center justify-between relative overflow-hidden border border-slate-700/50">
+                <div class="absolute -right-10 -top-10 md:-right-20 md:-top-20 opacity-[0.05] mix-blend-overlay pointer-events-none">
+                    <i data-lucide="aperture" class="w-64 h-64 md:w-96 md:h-96"></i>
                 </div>
-                <div class="relative z-10 w-full mb-8 md:mb-0 md:w-1/3">
-                    <div class="inline-flex items-center space-x-2 bg-orange-500/20 text-orange-400 px-3 py-1.5 rounded-full text-xs font-bold tracking-wider mb-4 border border-orange-500/30">
-                        <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
+                <div class="relative z-10 w-full mb-6 lg:mb-0 lg:w-1/3">
+                    <div class="inline-flex items-center space-x-2 bg-orange-500/20 text-orange-400 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold tracking-wider mb-3 md:mb-4 border border-orange-500/30">
+                        <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-orange-500 animate-pulse"></div>
                         <span>STRATEJİK DAĞILIM</span>
                     </div>
-                    <h3 class="font-bold text-2xl md:text-3xl title-font mb-3">Format Karması</h3>
-                    <p class="text-slate-400 text-sm md:text-base leading-relaxed">Algoritmayı lehimize çevirmek ve büyüme hedeflerini maksimize etmek için planlanan içerik yüzdeleri.</p>
+                    <h3 class="font-bold text-xl sm:text-2xl md:text-3xl title-font mb-2 md:mb-3">Format Karması</h3>
+                    <p class="text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed">Algoritmayı lehimize çevirmek ve büyüme hedeflerini maksimize etmek için planlanan içerik yüzdeleri.</p>
                 </div>
                 
-                <div class="relative z-10 w-full md:w-2/3 flex flex-wrap gap-3 md:gap-4 md:justify-end">
-                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center shadow-xl">
-                        <span class="text-3xl font-black text-orange-400 mr-3">60<span class="text-xl opacity-70">%</span></span>
-                        <span class="text-sm font-semibold text-slate-200">Reels<br><span class="text-[10px] text-slate-400 font-normal">Kısa Video</span></span>
+                <div class="relative z-10 w-full lg:w-2/3 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 md:gap-4 lg:justify-end">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl px-4 py-3 md:px-5 md:py-4 flex items-center shadow-xl">
+                        <span class="text-2xl md:text-3xl font-black text-orange-400 mr-2 md:mr-3">60<span class="text-lg md:text-xl opacity-70">%</span></span>
+                        <span class="text-xs md:text-sm font-semibold text-slate-200">Reels<br><span class="text-[9px] md:text-[10px] text-slate-400 font-normal">Kısa Video</span></span>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center shadow-xl">
-                        <span class="text-3xl font-black text-blue-400 mr-3">20<span class="text-xl opacity-70">%</span></span>
-                        <span class="text-sm font-semibold text-slate-200">Carousel<br><span class="text-[10px] text-slate-400 font-normal">Kaydırmalı</span></span>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl px-4 py-3 md:px-5 md:py-4 flex items-center shadow-xl">
+                        <span class="text-2xl md:text-3xl font-black text-blue-400 mr-2 md:mr-3">20<span class="text-lg md:text-xl opacity-70">%</span></span>
+                        <span class="text-xs md:text-sm font-semibold text-slate-200">Carousel<br><span class="text-[9px] md:text-[10px] text-slate-400 font-normal">Kaydırmalı</span></span>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center shadow-xl">
-                        <span class="text-3xl font-black text-emerald-400 mr-3">10<span class="text-xl opacity-70">%</span></span>
-                        <span class="text-sm font-semibold text-slate-200">Story<br><span class="text-[10px] text-slate-400 font-normal">Etkileşim</span></span>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl px-4 py-3 md:px-5 md:py-4 flex items-center shadow-xl">
+                        <span class="text-2xl md:text-3xl font-black text-emerald-400 mr-2 md:mr-3">10<span class="text-lg md:text-xl opacity-70">%</span></span>
+                        <span class="text-xs md:text-sm font-semibold text-slate-200">Story<br><span class="text-[9px] md:text-[10px] text-slate-400 font-normal">Etkileşim</span></span>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center shadow-xl">
-                        <span class="text-3xl font-black text-pink-400 mr-3">10<span class="text-xl opacity-70">%</span></span>
-                        <span class="text-sm font-semibold text-slate-200">UGC<br><span class="text-[10px] text-slate-400 font-normal">Müşteri</span></span>
+                    <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl px-4 py-3 md:px-5 md:py-4 flex items-center shadow-xl">
+                        <span class="text-2xl md:text-3xl font-black text-pink-400 mr-2 md:mr-3">10<span class="text-lg md:text-xl opacity-70">%</span></span>
+                        <span class="text-xs md:text-sm font-semibold text-slate-200">UGC<br><span class="text-[9px] md:text-[10px] text-slate-400 font-normal">Müşteri</span></span>
                     </div>
                 </div>
             </div>
             
-            <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
                 <!-- Video 1 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="wallet" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="wallet" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="badge-info" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> Finansal Taktik
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="badge-info" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> Finansal Taktik
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-orange-600 transition-colors">2 Milyona Ne Alınır?</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"Cebinizde tam 2 Milyon TL var ve işinize en uygun çekiciyi arıyorsunuz..."</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-orange-600 transition-colors relative z-10">2 Milyona Ne Alınır?</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-orange-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"Cebinizde tam 2 Milyon TL var ve işinize en uygun çekiciyi arıyorsunuz..."</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="bar-chart-4" class="w-4 h-4 mr-2 text-blue-500"></i> Pillar: Köklü Güvence & Yönlendirme
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="bar-chart-4" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-blue-500 flex-shrink-0"></i> <span class="truncate">Köklü Güvence & Yönlendirme</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 2 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-amber-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="headphones" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-amber-500">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="headphones" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-amber-50 text-amber-700 rounded-lg inline-flex items-center shadow-sm border border-amber-200/60">
-                            <i data-lucide="speaker" class="w-3.5 h-3.5 mr-1.5 text-amber-500"></i> ASMR / Tatmin Edici
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-amber-50 text-amber-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-amber-200/60">
+                            <i data-lucide="speaker" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-amber-500"></i> ASMR / Tatmin Edici
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-amber-600 transition-colors">ASMR Kabin İçi Şöleni</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"(Müzik yok, konuşma yok. Sadece tok bir kapı kapanma sesi ve saf V8 Motor kükremesi...)"</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-amber-600 transition-colors relative z-10">ASMR Kabin İçi Şöleni</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-amber-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"(Müzik yok, konuşma yok. Sadece tok bir kapı kapanma sesi ve saf V8 Motor kükremesi...)"</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="truck" class="w-4 h-4 mr-2 text-emerald-500"></i> Pillar: Mega Stok
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="truck" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-emerald-500 flex-shrink-0"></i> <span class="truncate">Mega Stok</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 3 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-sky-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="sparkles" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-sky-500">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="sparkles" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-sky-50 text-sky-700 rounded-lg inline-flex items-center shadow-sm border border-sky-200/60">
-                            <i data-lucide="mic" class="w-3.5 h-3.5 mr-1.5 text-sky-500"></i> ASMR / Temizlik
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-sky-50 text-sky-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-sky-200/60">
+                            <i data-lucide="mic" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-sky-500"></i> ASMR / Temizlik
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-sky-50 text-sky-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-sky-50 text-sky-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-sky-600 transition-colors">ASMR Detaylı Temizlik</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-sky-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"(Sadece fırçalanan deri koltuk sesleri, basınçlı su ve ilk günkü gibi parlayan konsol hissiyatı...)"</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-sky-600 transition-colors relative z-10">ASMR Detaylı Temizlik</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-sky-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"(Sadece fırçalanan deri koltuk sesleri, basınçlı su ve ilk günkü gibi parlayan konsol hissiyatı...)"</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="shield-check" class="w-4 h-4 mr-2 text-emerald-500"></i> Pillar: Köklü Güvence (2. El)
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="shield-check" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-emerald-500 flex-shrink-0"></i> <span class="truncate">Köklü Güvence (2. El)</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 4 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="search" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="search" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="wrench" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> İnceleme / Bilgi
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="wrench" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> İnceleme / Bilgi
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-orange-600 transition-colors">Ustaların Ekspertiz Sırrı</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"İkinci el tır alırken şaside sadece ustaların bildiği şu detaya bakmayan zarar eder..."</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-orange-600 transition-colors relative z-10">Ustaların Ekspertiz Sırrı</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-orange-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"İkinci el tır alırken şaside sadece ustaların bildiği şu detaya bakmayan zarar eder..."</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 text-blue-500"></i> Pillar: Şeffaf Ekspertiz
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="check-circle" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-blue-500 flex-shrink-0"></i> <span class="truncate">Şeffaf Ekspertiz</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 5 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-emerald-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="volume-2" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-emerald-500">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="volume-2" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-lg inline-flex items-center shadow-sm border border-emerald-200/60">
-                            <i data-lucide="users" class="w-3.5 h-3.5 mr-1.5 text-emerald-500"></i> UGC / Müşteri
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-emerald-50 text-emerald-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-emerald-200/60">
+                            <i data-lucide="users" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-emerald-500"></i> UGC / Müşteri
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-emerald-600 transition-colors">Korna Ritüeli (3 Teslimat)</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"Bugün 3 esnafımız daha hayallerindeki araca kavuştu. Güvenin sesi işte o kornada gizli!"</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-emerald-600 transition-colors relative z-10">Korna Ritüeli (3 Teslimat)</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-emerald-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"Bugün 3 esnafımız daha hayallerindeki araca kavuştu. Güvenin sesi işte o kornada gizli!"</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="thumbs-up" class="w-4 h-4 mr-2 text-emerald-500"></i> Pillar: Korna Ritüeli (Güven)
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="thumbs-up" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-emerald-500 flex-shrink-0"></i> <span class="truncate">Korna Ritüeli (Güven)</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 6 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="box" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="box" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="video" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> Görsel Şölen
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="video" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> Görsel Şölen
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-orange-600 transition-colors">Drone ile Tır Pazarında Kaybolmak</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"Aradığın aracı burada bulamama ihtimalin yok. İşte Neşeli'nin dev araç stoğu..."</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-orange-600 transition-colors relative z-10">Drone ile Tır Pazarında...</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-orange-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"Aradığın aracı burada bulamama ihtimalin yok. İşte Neşeli'nin dev araç stoğu..."</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="truck" class="w-4 h-4 mr-2 text-blue-500"></i> Pillar: Mega Stok & Tesis
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="truck" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-blue-500 flex-shrink-0"></i> <span class="truncate">Mega Stok & Tesis</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 7 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="calculator" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="calculator" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="landmark" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> Finansal Taktik
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="landmark" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> Finansal Taktik
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-orange-600 transition-colors">Kredi Çıkmaz Diyenlere İnat</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"Bankalar ret mi verdi? Bizdeki finansman çözümünü ve yönlendirmemizi dinlemeden tır sevdasından vazgeçme."</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-orange-600 transition-colors relative z-10">Kredi Çıkmaz Diyenlere İnat</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-orange-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"Bankalar ret mi verdi? Bizdeki finansman çözümünü dinlemeden tır sevdasından vazgeçme."</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="bar-chart-4" class="w-4 h-4 mr-2 text-blue-500"></i> Pillar: Köklü Güvence & Yönlendirme
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="bar-chart-4" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-blue-500 flex-shrink-0"></i> <span class="truncate">Köklü Güvence & Yönlendirme</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 8 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-slate-500">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="settings" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300 border-t-4 border-t-slate-500">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="settings" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="wrench" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> ASMR / Mekanik
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="wrench" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> ASMR / Mekanik
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-slate-600 transition-colors">ASMR: Ağır Vasıta Bakımı</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-slate-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"(Sadece tıkır tıkır çalışan usta alet sesleri, yağ değişimi ve motorun o sağlıklı ilk çalışma anı...)"</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-slate-600 transition-colors relative z-10">ASMR: Ağır Vasıta Bakımı</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-slate-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"(Sadece tıkır tıkır çalışan usta alet sesleri, yağ değişimi ve motorun o sağlıklı ilk çalışma anı...)"</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="shield-check" class="w-4 h-4 mr-2 text-emerald-500"></i> Pillar: Köklü Güvence (Bakım)
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="shield-check" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-emerald-500 flex-shrink-0"></i> <span class="truncate">Köklü Güvence (Bakım)</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 9 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="coffee" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="coffee" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="smile" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> Sohbet / Güven
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="smile" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> Sohbet / Güven
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-orange-600 transition-colors">Usta İle Çay Molası</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"Şu an piyasa durgun diyorlar ama bizim usta ne diyor? Gelin demli bir çayını içip gerçeği öğrenelim..."</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-orange-600 transition-colors relative z-10">Usta İle Çay Molası</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-orange-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"Şu an piyasa durgun diyorlar ama bizim usta ne diyor? Gelin demli bir çayını içip gerçeği öğrenelim..."</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="users" class="w-4 h-4 mr-2 text-blue-500"></i> Pillar: Esnaf Samimiyeti
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="users" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-blue-500 flex-shrink-0"></i> <span class="truncate">Esnaf Samimiyeti</span>
                         </span>
                     </div>
                 </div>
 
                 <!-- Video 10 -->
-                <div class="glass-card p-6 md:p-8 rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
-                    <div class="absolute top-0 right-0 p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
-                        <i data-lucide="git-compare" class="w-40 h-40 text-slate-900"></i>
+                <div class="glass-card p-5 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl relative overflow-hidden group hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute top-0 right-0 p-4 md:p-6 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity duration-500 pointer-events-none transform group-hover:rotate-12 group-hover:scale-110">
+                        <i data-lucide="git-compare" class="w-24 h-24 md:w-40 md:h-40 text-slate-900"></i>
                     </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
-                            <i data-lucide="git-compare" class="w-3.5 h-3.5 mr-1.5 text-slate-500"></i> İnceleme / Bilgi
+                    <div class="flex items-center justify-between mb-3 md:mb-4 relative z-10">
+                        <span class="text-[10px] md:text-xs font-bold px-2.5 py-1 md:px-3 md:py-1.5 bg-slate-100 text-slate-700 rounded-md md:rounded-lg inline-flex items-center shadow-sm border border-slate-200/60">
+                            <i data-lucide="git-compare" class="w-3 h-3 md:w-3.5 md:h-3.5 mr-1 md:mr-1.5 text-slate-500"></i> İnceleme / Bilgi
                         </span>
-                        <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center">
-                            <i data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+                        <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="play" class="w-3 h-3 md:w-4 md:h-4 ml-0.5"></i>
                         </div>
                     </div>
                     
-                    <h4 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 title-font group-hover:text-orange-600 transition-colors">Hangi Dorse Hangi Yüke?</h4>
-                    <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-100 relative">
-                        <span class="absolute -top-2.5 left-4 bg-orange-500 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
-                        <p class="text-slate-600 text-sm italic">"Hafriyatçı mısın, lojistikçi mi? İşine en uygun ve sana para kazandıracak dorseyi 30 saniyede seçiyoruz."</p>
+                    <h4 class="text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mt-1 md:mt-2 title-font group-hover:text-orange-600 transition-colors relative z-10">Hangi Dorse Hangi Yüke?</h4>
+                    <div class="mt-3 md:mt-4 p-3 md:p-4 bg-slate-50 rounded-xl border border-slate-100 relative z-10">
+                        <span class="absolute -top-2.5 left-3 md:left-4 bg-orange-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 md:px-2 md:py-0.5 rounded shadow-sm uppercase tracking-wider">Hook (Kanca)</span>
+                        <p class="text-slate-600 text-xs md:text-sm italic">"Hafriyatçı mısın, lojistikçi mi? İşine en uygun ve sana para kazandıracak dorseyi 30 saniyede seçiyoruz."</p>
                     </div>
-                    <div class="mt-6 flex items-center pt-5 border-t border-slate-100/80">
-                        <span class="text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-3 py-1.5 rounded-lg">
-                            <i data-lucide="check-circle" class="w-4 h-4 mr-2 text-emerald-500"></i> Pillar: Şeffaf Ekspertiz
+                    <div class="mt-4 md:mt-6 flex items-center pt-4 md:pt-5 border-t border-slate-100/80 relative z-10">
+                        <span class="text-[10px] md:text-xs text-slate-500 font-semibold flex items-center bg-slate-100/50 px-2.5 md:px-3 py-1 md:py-1.5 rounded-lg w-full">
+                            <i data-lucide="check-circle" class="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2 text-emerald-500 flex-shrink-0"></i> <span class="truncate">Şeffaf Ekspertiz</span>
                         </span>
                     </div>
                 </div>
@@ -671,23 +686,23 @@
         <div id="takvim" class="tab-content space-y-6">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-2">
                 <div>
-                    <h3 class="text-2xl font-bold text-slate-800 title-font tracking-tight">Örnek İçerik Takvimi</h3>
+                    <h3 class="text-xl sm:text-2xl font-bold text-slate-800 title-font tracking-tight">Örnek İçerik Takvimi</h3>
                     <p class="text-slate-500 mt-1 text-sm md:text-base font-medium">Sürdürülebilir büyüme için planlanmış ilk 10 günlük akış.</p>
                 </div>
-                <div class="mt-4 lg:mt-0 px-4 py-2 bg-orange-50 text-orange-700 rounded-xl font-medium text-xs md:text-sm flex items-center border border-orange-100/50 shadow-sm">
-                    <i data-lucide="zap" class="w-4 h-4 mr-2 text-orange-500 flex-shrink-0 fill-orange-500"></i> Yayın saatleri algoritmaya göre optimize edilmiştir.
+                <div class="mt-4 lg:mt-0 px-3 md:px-4 py-2 bg-orange-50 text-orange-700 rounded-xl font-medium text-xs md:text-sm flex items-center border border-orange-100/50 shadow-sm w-fit">
+                    <i data-lucide="zap" class="w-4 h-4 mr-2 text-orange-500 flex-shrink-0 fill-orange-500"></i> Saatler optimize edilmiştir.
                 </div>
             </div>
 
-            <div class="glass-card rounded-3xl overflow-hidden p-2 md:p-4">
+            <div class="glass-card rounded-2xl md:rounded-3xl overflow-hidden p-2 md:p-4 max-w-[100vw] lg:max-w-full">
                 <div class="overflow-x-auto w-full custom-scrollbar pb-2">
-                    <table class="w-full text-left border-separate border-spacing-y-2 min-w-[700px]">
+                    <table class="w-full text-left border-separate border-spacing-y-2 min-w-[600px] md:min-w-[700px]">
                         <thead>
-                            <tr class="text-slate-400 text-[10px] md:text-xs uppercase font-bold tracking-wider px-4">
-                                <th class="pb-3 pl-6 font-semibold">Gün / Tarih</th>
-                                <th class="pb-3 px-4 font-semibold">Format</th>
-                                <th class="pb-3 px-4 font-semibold">İçerik Konusu</th>
-                                <th class="pb-3 pr-6 text-right font-semibold">Saat</th>
+                            <tr class="text-slate-400 text-[10px] md:text-xs uppercase font-bold tracking-wider px-2 md:px-4">
+                                <th class="pb-2 md:pb-3 pl-4 md:pl-6 font-semibold">Gün / Tarih</th>
+                                <th class="pb-2 md:pb-3 px-3 md:px-4 font-semibold">Format</th>
+                                <th class="pb-2 md:pb-3 px-3 md:px-4 font-semibold">İçerik Konusu</th>
+                                <th class="pb-2 md:pb-3 pr-4 md:pr-6 text-right font-semibold">Saat</th>
                             </tr>
                         </thead>
                         <tbody id="calendar-body" class="text-slate-700">
@@ -700,93 +715,93 @@
 
         <!-- --- TAB: REKLAM --- -->
         <div id="reklam" class="tab-content">
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold text-slate-800 title-font tracking-tight">Full-Funnel Reklam Mimarisi</h3>
+            <div class="mb-6 md:mb-8">
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-800 title-font tracking-tight">Full-Funnel Reklam Mimarisi</h3>
                 <p class="text-slate-500 mt-1 text-sm md:text-base font-medium">Müşteriyi yakalamaktan satışı kapatmaya kadar tam entegre performans stratejisi.</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6 md:gap-8 relative">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative pt-4 md:pt-0">
                 <!-- Bağlantı Çizgisi (Desktop) -->
                 <div class="hidden md:block absolute top-1/2 left-10 right-10 h-0.5 bg-gradient-to-r from-slate-200 via-orange-300 to-slate-200 -z-10 -translate-y-1/2"></div>
                 
                 <!-- 1: Top Funnel -->
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-blue-400 relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="absolute -top-5 left-8 w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shadow-md border border-white">
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl border-t-4 border-t-blue-400 relative group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="absolute -top-5 left-6 md:left-8 w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center shadow-md border border-white">
                         <span class="font-black text-lg">1</span>
                     </div>
-                    <div class="mt-4 mb-5">
-                        <h3 class="font-bold text-xl title-font text-slate-800 flex items-center">
-                            Keşif <span class="text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded-md ml-3 tracking-wide">Top Funnel</span>
+                    <div class="mt-2 md:mt-4 mb-4 md:mb-5">
+                        <h3 class="font-bold text-lg md:text-xl title-font text-slate-800 flex items-center">
+                            Keşif <span class="text-[10px] md:text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded-md ml-3 tracking-wide">Top Funnel</span>
                         </h3>
                     </div>
-                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Yeni kitlelere tesisi ve büyük stoğu gösterme. Sektörel marka bilinirliği artışı hedeflenir.</p>
-                    <div class="space-y-3 pt-5 border-t border-slate-100/80">
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="pie-chart" class="w-4 h-4 mr-2 text-slate-400"></i> Bütçe:</span> 
+                    <p class="text-slate-600 text-xs sm:text-sm mb-5 md:mb-6 leading-relaxed">Yeni kitlelere tesisi ve büyük stoğu gösterme. Sektörel marka bilinirliği artışı hedeflenir.</p>
+                    <div class="space-y-2 md:space-y-3 pt-4 md:pt-5 border-t border-slate-100/80">
+                        <div class="flex items-center justify-between text-xs md:text-sm">
+                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="pie-chart" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2 text-slate-400"></i> Bütçe:</span> 
                             <span class="font-bold text-slate-800">%20</span>
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="image" class="w-4 h-4 mr-2 text-slate-400"></i> İçerik:</span> 
+                        <div class="flex items-center justify-between text-xs md:text-sm">
+                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="image" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2 text-slate-400"></i> İçerik:</span> 
                             <span class="font-semibold text-slate-700">Drone Turu</span>
                         </div>
-                        <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Hedef (KPI)</span>
-                            <span class="text-blue-600 font-bold text-sm flex items-center"><i data-lucide="eye" class="w-4 h-4 mr-1.5"></i> CPM (Gösterim)</span>
+                        <div class="mt-3 md:mt-4 bg-slate-50 p-2.5 md:p-3 rounded-xl border border-slate-100 flex flex-col">
+                            <span class="text-[9px] md:text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5 md:mb-1">Hedef (KPI)</span>
+                            <span class="text-blue-600 font-bold text-xs md:text-sm flex items-center"><i data-lucide="eye" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5"></i> CPM (Gösterim)</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 2: Mid Funnel (Odak) -->
-                <div class="bg-gradient-to-b from-white to-orange-50 p-8 rounded-3xl shadow-xl shadow-orange-500/10 border border-orange-200 relative group transform md:scale-105 z-10 border-t-4 border-t-orange-500">
-                    <div class="absolute -top-3 right-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md">Ana Odak</div>
-                    <div class="absolute -top-5 left-8 w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30 border border-white">
+                <div class="bg-gradient-to-b from-white to-orange-50 p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl shadow-orange-500/10 border border-orange-200 relative group transform md:scale-105 z-10 border-t-4 border-t-orange-500 mt-4 md:mt-0">
+                    <div class="absolute -top-3 right-4 md:right-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white text-[9px] md:text-[10px] font-bold px-2.5 md:px-3 py-1 md:py-1.5 rounded-full uppercase tracking-wider shadow-md">Ana Odak</div>
+                    <div class="absolute -top-5 left-6 md:left-8 w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30 border border-white">
                         <span class="font-black text-lg">2</span>
                     </div>
-                    <div class="mt-4 mb-5">
-                        <h3 class="font-bold text-xl title-font text-slate-800 flex items-center">
-                            Trafik & Lead <span class="text-xs font-semibold bg-orange-100 text-orange-600 px-2 py-1 rounded-md ml-3 tracking-wide">Mid Funnel</span>
+                    <div class="mt-2 md:mt-4 mb-4 md:mb-5">
+                        <h3 class="font-bold text-lg md:text-xl title-font text-slate-800 flex items-center">
+                            Trafik & Lead <span class="text-[10px] md:text-xs font-semibold bg-orange-100 text-orange-600 px-2 py-1 rounded-md ml-3 tracking-wide">Mid Funnel</span>
                         </h3>
                     </div>
-                    <p class="text-slate-700 text-sm mb-6 leading-relaxed">Kiralama arayanları en baştan eleyip, sadece <strong class="text-slate-800">doğrudan satışa</strong> ve WhatsApp iletişimine yönlendiren yüksek dönüşümlü kampanyalar.</p>
-                    <div class="space-y-3 pt-5 border-t border-orange-200/50">
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-600 font-medium flex items-center"><i data-lucide="pie-chart" class="w-4 h-4 mr-2 text-orange-400"></i> Bütçe:</span> 
-                            <span class="font-black text-orange-600 text-base">%60</span>
+                    <p class="text-slate-700 text-xs sm:text-sm mb-5 md:mb-6 leading-relaxed">Kiralama arayanları en baştan eleyip, sadece <strong class="text-slate-800">doğrudan satışa</strong> ve WhatsApp iletişimine yönlendiren kampanyalar.</p>
+                    <div class="space-y-2 md:space-y-3 pt-4 md:pt-5 border-t border-orange-200/50">
+                        <div class="flex items-center justify-between text-xs md:text-sm">
+                            <span class="text-slate-600 font-medium flex items-center"><i data-lucide="pie-chart" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2 text-orange-400"></i> Bütçe:</span> 
+                            <span class="font-black text-orange-600 text-sm md:text-base">%60</span>
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-600 font-medium flex items-center"><i data-lucide="image" class="w-4 h-4 mr-2 text-orange-400"></i> İçerik:</span> 
-                            <span class="font-semibold text-slate-800">Temiz 2. El, Firma Güvencesi</span>
+                        <div class="flex items-center justify-between text-xs md:text-sm">
+                            <span class="text-slate-600 font-medium flex items-center"><i data-lucide="image" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2 text-orange-400"></i> İçerik:</span> 
+                            <span class="font-semibold text-slate-800 truncate pl-2">Temiz 2. El, Güvence</span>
                         </div>
-                        <div class="mt-4 bg-white p-3 rounded-xl border border-orange-100 shadow-sm flex flex-col">
-                            <span class="text-[10px] uppercase font-bold text-orange-400 tracking-wider mb-1">Hedef (KPI)</span>
-                            <span class="text-orange-600 font-bold text-sm flex items-center"><i data-lucide="message-circle" class="w-4 h-4 mr-1.5 fill-orange-100"></i> CPL / WA Tıklama</span>
+                        <div class="mt-3 md:mt-4 bg-white p-2.5 md:p-3 rounded-xl border border-orange-100 shadow-sm flex flex-col">
+                            <span class="text-[9px] md:text-[10px] uppercase font-bold text-orange-400 tracking-wider mb-0.5 md:mb-1">Hedef (KPI)</span>
+                            <span class="text-orange-600 font-bold text-xs md:text-sm flex items-center"><i data-lucide="message-circle" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 fill-orange-100"></i> CPL / WA Tıklama</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 3: Bottom Funnel -->
-                <div class="glass-card p-8 rounded-3xl border-t-4 border-t-emerald-400 relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="absolute -top-5 left-8 w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shadow-md border border-white">
+                <div class="glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl border-t-4 border-t-emerald-400 relative group hover:-translate-y-2 transition-transform duration-300 mt-4 md:mt-0">
+                    <div class="absolute -top-5 left-6 md:left-8 w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shadow-md border border-white">
                         <span class="font-black text-lg">3</span>
                     </div>
-                    <div class="mt-4 mb-5">
-                        <h3 class="font-bold text-xl title-font text-slate-800 flex items-center">
-                            Remarketing <span class="text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded-md ml-3 tracking-wide">Bot Funnel</span>
+                    <div class="mt-2 md:mt-4 mb-4 md:mb-5">
+                        <h3 class="font-bold text-lg md:text-xl title-font text-slate-800 flex items-center">
+                            Remarketing <span class="text-[10px] md:text-xs font-semibold bg-slate-100 text-slate-500 px-2 py-1 rounded-md ml-3 tracking-wide">Bot Funnel</span>
                         </h3>
                     </div>
-                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Etkileşime girenleri satın almaya ikna etme ve sosyal kanıtlarla son güveni aşılama.</p>
-                    <div class="space-y-3 pt-5 border-t border-slate-100/80">
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="pie-chart" class="w-4 h-4 mr-2 text-slate-400"></i> Bütçe:</span> 
+                    <p class="text-slate-600 text-xs sm:text-sm mb-5 md:mb-6 leading-relaxed">Etkileşime girenleri satın almaya ikna etme ve sosyal kanıtlarla son güveni aşılama.</p>
+                    <div class="space-y-2 md:space-y-3 pt-4 md:pt-5 border-t border-slate-100/80">
+                        <div class="flex items-center justify-between text-xs md:text-sm">
+                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="pie-chart" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2 text-slate-400"></i> Bütçe:</span> 
                             <span class="font-bold text-slate-800">%20</span>
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="image" class="w-4 h-4 mr-2 text-slate-400"></i> İçerik:</span> 
+                        <div class="flex items-center justify-between text-xs md:text-sm">
+                            <span class="text-slate-500 font-medium flex items-center"><i data-lucide="image" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2 text-slate-400"></i> İçerik:</span> 
                             <span class="font-semibold text-slate-700">Teslimat (UGC)</span>
                         </div>
-                        <div class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-100 flex flex-col">
-                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-1">Hedef (KPI)</span>
-                            <span class="text-emerald-600 font-bold text-sm flex items-center"><i data-lucide="trending-up" class="w-4 h-4 mr-1.5"></i> Satış Dönüşümü</span>
+                        <div class="mt-3 md:mt-4 bg-slate-50 p-2.5 md:p-3 rounded-xl border border-slate-100 flex flex-col">
+                            <span class="text-[9px] md:text-[10px] uppercase font-bold text-slate-400 tracking-wider mb-0.5 md:mb-1">Hedef (KPI)</span>
+                            <span class="text-emerald-600 font-bold text-xs md:text-sm flex items-center"><i data-lucide="trending-up" class="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5"></i> Satış Dönüşümü</span>
                         </div>
                     </div>
                 </div>
@@ -795,11 +810,11 @@
 
         <!-- --- TAB: AKSİYON --- -->
         <div id="aksiyon" class="tab-content">
-            <div class="glass-card p-8 md:p-12 rounded-[2rem] shadow-2xl shadow-slate-200/50">
-                <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-6">
+            <div class="glass-card p-5 sm:p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] shadow-2xl shadow-slate-200/50 max-w-4xl mx-auto">
+                <div class="mb-6 md:mb-8 flex flex-col md:flex-row md:items-end justify-between border-b border-slate-100 pb-5 md:pb-6">
                     <div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 title-font tracking-tight">İlk 7 Günlük Uygulama Planı</h3>
-                        <p class="text-slate-500 mt-2 text-sm md:text-base font-medium">Hızlı başlangıç ve momentum yakalamak için tamamlanması gereken operasyonel adımlar.</p>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 title-font tracking-tight">İlk 7 Günlük Uygulama Planı</h3>
+                        <p class="text-slate-500 mt-2 text-xs sm:text-sm md:text-base font-medium">Hızlı başlangıç ve momentum yakalamak için tamamlanması gereken operasyonel adımlar.</p>
                     </div>
                     <div class="hidden md:flex items-center space-x-2 bg-orange-50 text-orange-600 px-4 py-2 rounded-full font-bold text-sm mt-4 md:mt-0">
                         <i data-lucide="clock" class="w-4 h-4"></i>
@@ -811,14 +826,14 @@
                     <!-- JS will inject modern checklist items here -->
                 </div>
 
-                <div class="mt-10 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-slate-900 to-[#0f172a] p-8 md:p-10 rounded-[1.5rem] relative overflow-hidden shadow-xl">
-                    <div class="absolute right-0 top-0 w-64 h-64 bg-orange-500/20 blur-3xl rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-                    <div class="mb-6 sm:mb-0 text-center sm:text-left relative z-10">
-                        <h4 class="font-bold text-white title-font text-xl md:text-2xl mb-1">Harekete Geçmeye Hazır mıyız?</h4>
-                        <p class="text-sm text-slate-400 font-medium">Stratejiyi onaylayıp prodüksiyon takvimini başlatın.</p>
+                <div class="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-slate-900 to-[#0f172a] p-6 md:p-10 rounded-2xl md:rounded-[1.5rem] relative overflow-hidden shadow-xl">
+                    <div class="absolute right-0 top-0 w-48 h-48 md:w-64 md:h-64 bg-orange-500/20 blur-3xl rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+                    <div class="mb-5 sm:mb-0 text-center sm:text-left relative z-10">
+                        <h4 class="font-bold text-white title-font text-lg md:text-xl lg:text-2xl mb-1 md:mb-2">Harekete Geçmeye Hazır mıyız?</h4>
+                        <p class="text-xs md:text-sm text-slate-400 font-medium">Stratejiyi onaylayıp prodüksiyon takvimini başlatın.</p>
                     </div>
-                    <a href="https://wa.me/905322426012?text=Merhaba,%20strateji%20raporunu%20inceledim%20ve%20onayl%C4%B1yorum.%20Ba%C5%9Flayabiliriz!" target="_blank" class="relative z-10 w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-1 text-center text-base tracking-wide border border-orange-400/50">
-                        <i data-lucide="rocket" class="w-5 h-5 mr-2"></i> Stratejiyi Onayla & Başla
+                    <a href="https://wa.me/905322426012?text=Merhaba,%20strateji%20raporunu%20inceledim%20ve%20onayl%C4%B1yorum.%20Ba%C5%9Flayabiliriz!" target="_blank" class="relative z-10 w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-bold py-3.5 md:py-4 px-6 md:px-8 rounded-xl transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-1 text-center text-sm md:text-base tracking-wide border border-orange-400/50">
+                        <i data-lucide="rocket" class="w-4 h-4 md:w-5 md:h-5 mr-2"></i> Onayla & Başla
                     </a>
                 </div>
             </div>
@@ -918,12 +933,12 @@
         tr.className = "bg-white hover:bg-orange-50/40 transition-colors shadow-sm rounded-xl overflow-hidden group";
         
         tr.innerHTML = `
-            <td class="p-4 md:p-5 whitespace-nowrap font-bold text-slate-800 rounded-l-xl border-y border-l border-slate-100 group-hover:border-orange-100">${row.day}</td>
-            <td class="p-4 md:p-5 border-y border-slate-100 group-hover:border-orange-100">
-                <span class="${row.formatColor} border px-2.5 py-1 rounded-md text-[10px] md:text-xs font-bold whitespace-nowrap shadow-sm">${row.format}</span>
+            <td class="p-3 md:p-4 whitespace-nowrap font-bold text-slate-800 rounded-l-xl border-y border-l border-slate-100 group-hover:border-orange-100 text-xs md:text-sm">${row.day}</td>
+            <td class="p-3 md:p-4 border-y border-slate-100 group-hover:border-orange-100">
+                <span class="${row.formatColor} border px-2 py-1 md:px-2.5 md:py-1 rounded-md text-[9px] md:text-xs font-bold whitespace-nowrap shadow-sm block w-fit">${row.format}</span>
             </td>
-            <td class="p-4 md:p-5 font-semibold text-slate-700 border-y border-slate-100 group-hover:border-orange-100">${row.content}</td>
-            <td class="p-4 md:p-5 text-sm font-medium text-slate-400 text-right rounded-r-xl border-y border-r border-slate-100 group-hover:border-orange-100">${row.time}</td>
+            <td class="p-3 md:p-4 font-semibold text-slate-700 border-y border-slate-100 group-hover:border-orange-100 text-xs md:text-sm leading-tight">${row.content}</td>
+            <td class="p-3 md:p-4 text-xs md:text-sm font-medium text-slate-400 text-right rounded-r-xl border-y border-r border-slate-100 group-hover:border-orange-100">${row.time}</td>
         `;
         calendarBody.appendChild(tr);
     });
@@ -932,7 +947,7 @@
     const checklistContainer = document.getElementById('checklist-container');
     checklistData.forEach((text, index) => {
         const div = document.createElement('div');
-        div.className = "flex items-center p-4 rounded-2xl border border-slate-100 bg-white hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/5 cursor-pointer transition-all duration-300 group";
+        div.className = "flex items-start md:items-center p-3 sm:p-4 rounded-xl md:rounded-2xl border border-slate-100 bg-white hover:border-orange-300 hover:shadow-lg hover:shadow-orange-500/5 cursor-pointer transition-all duration-300 group";
         div.onclick = function() {
             const circle = this.querySelector('.check-circle');
             const span = this.querySelector('.check-text');
@@ -955,10 +970,10 @@
             span.classList.toggle('text-slate-700');
         };
         div.innerHTML = `
-            <div class="check-circle w-7 h-7 flex-shrink-0 rounded-xl border-2 border-slate-200 bg-slate-50 flex items-center justify-center mr-4 transition-all duration-300 group-hover:border-orange-300">
-                <i data-lucide="check" class="check-icon w-4 h-4 text-white opacity-0 scale-50 transition-all duration-300 transform"></i>
+            <div class="check-circle w-6 h-6 md:w-7 md:h-7 mt-0.5 md:mt-0 flex-shrink-0 rounded-lg md:rounded-xl border-2 border-slate-200 bg-slate-50 flex items-center justify-center mr-3 md:mr-4 transition-all duration-300 group-hover:border-orange-300">
+                <i data-lucide="check" class="check-icon w-3 h-3 md:w-4 md:h-4 text-white opacity-0 scale-50 transition-all duration-300 transform"></i>
             </div>
-            <span class="check-text text-slate-700 font-semibold text-sm md:text-base select-none transition-all duration-300">${text}</span>
+            <span class="check-text text-slate-700 font-semibold text-xs sm:text-sm md:text-base select-none transition-all duration-300 leading-snug">${text}</span>
         `;
         checklistContainer.appendChild(div);
     });
